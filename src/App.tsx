@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  const [value, setValue] = useState<string>('default');
+  useEffect(() => {
+    axios.get('http://localhost:3001').then((res) => {
+      setValue(res.data);
+    })
+  },[])
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +25,7 @@ function App() {
         >
           Learn React
         </a>
+        <p>{value}</p>
       </header>
     </div>
   );
